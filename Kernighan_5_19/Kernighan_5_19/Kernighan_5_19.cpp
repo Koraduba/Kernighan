@@ -11,7 +11,8 @@ int tokentype;
 
 int main()
 {
-	
+	int metka = 0;
+
 	int gettoken(void);
 	char temp[MAXTOKEN];
 	int type;
@@ -22,14 +23,26 @@ int main()
 		while (gettoken() != '\n')
 		{
 			if (tokentype == BRACKETS || tokentype == PARENS)
+			{
+				if (metka)
+				{
+					metka = 0;
+				sprintf(temp, "(%s)", out);
+				strcpy(out, temp);
+				}
 				strcat(out, token);
+			}
+				
+				
 			else if (tokentype == '*')
 			{
-				sprintf(temp, "(*%s)", out);
+				metka = 1;
+				sprintf(temp, "*%s", out);
 				strcpy(out, temp);
 			}
 			else if (tokentype == NAME)
 			{
+				metka = 1;
 				sprintf(temp, "%s %s",token, out);
 				strcpy(out, temp);
 			}
